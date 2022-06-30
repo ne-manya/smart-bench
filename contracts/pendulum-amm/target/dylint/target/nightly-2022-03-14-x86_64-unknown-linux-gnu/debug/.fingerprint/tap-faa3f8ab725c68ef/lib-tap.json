@@ -1,0 +1,1 @@
+{"rustc":7412422202078880312,"features":"[]","target":18196292238300886791,"profile":12637318739757120569,"path":2624929557689311452,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug/.fingerprint/tap-faa3f8ab725c68ef/dep-lib-tap"}}],"rustflags":["-C","link-arg=-fuse-ld=/bin/mold"],"metadata":6574141762495208141,"config":16520146531172537597,"compile_kind":0}

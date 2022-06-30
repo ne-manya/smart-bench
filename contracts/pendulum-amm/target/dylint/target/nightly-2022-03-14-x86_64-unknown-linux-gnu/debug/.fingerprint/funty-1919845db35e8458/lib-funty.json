@@ -1,0 +1,1 @@
+{"rustc":7412422202078880312,"features":"[]","target":572259536965956152,"profile":3735503092003429423,"path":6172969546447458327,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug/.fingerprint/funty-1919845db35e8458/dep-lib-funty"}}],"rustflags":["-C","link-arg=-fuse-ld=/bin/mold"],"metadata":9237712608396048968,"config":16520146531172537597,"compile_kind":0}

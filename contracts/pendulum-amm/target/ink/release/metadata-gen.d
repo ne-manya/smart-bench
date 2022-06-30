@@ -1,0 +1,1 @@
+/home/menko/Documents/Satoshipay/smart-bench/contracts/pendulum-amm/target/ink/release/metadata-gen: /home/menko/Documents/Satoshipay/smart-bench/contracts/pendulum-amm/src/lib.rs /tmp/cargo-contract_zSweG3/.ink/metadata_gen/main.rs

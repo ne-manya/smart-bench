@@ -1,4 +1,3 @@
-mod evm;
 mod wasm;
 
 // export for use by contract! macro
@@ -28,21 +27,13 @@ pub struct Cli {
 #[derive(clap::ArgEnum, Debug, Clone)]
 pub enum TargetPlatform {
     Wasm,
-    Evm,
 }
 
 #[derive(clap::ArgEnum, Debug, Clone, Eq, PartialEq)]
 pub enum Contract {
-    Erc20,
-    Flipper,
-    Incrementer,
-    Erc721,
-    Erc1155,
     OddProduct,
     TriangleNumber,
-    StorageRead,
-    StorageWrite,
-    StorageReadWrite,
+    SetFeeTo,
 }
 
 #[tokio::main]
@@ -53,6 +44,5 @@ async fn main() -> color_eyre::Result<()> {
 
     match cli.chain {
         TargetPlatform::Wasm => wasm::exec(cli).await,
-        TargetPlatform::Evm => evm::exec(&cli).await,
     }
 }

@@ -1,0 +1,1 @@
+{"rustc":6889052415480890405,"features":"[]","target":15141271784968785197,"profile":17504242664759948721,"path":7086036537822510195,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/arrayvec-7a40b50085c26ad5/dep-lib-arrayvec"}}],"rustflags":["-C","link-arg=-fuse-ld=/bin/mold"],"metadata":5019420986621020735,"config":16520146531172537597,"compile_kind":0}

@@ -1,0 +1,1298 @@
+{
+  "source": {
+    "hash": "0x6601c95a6deeb953d98bfee758cf433ea7ec75a0ec88a73407f2a5c6f9f3f07b",
+    "language": "ink! 3.0.1",
+    "compiler": "rustc 1.63.0-nightly"
+  },
+  "contract": {
+    "name": "pendulum-amm",
+    "version": "0.1.0",
+    "authors": [
+      "SatoshiPay"
+    ]
+  },
+  "V3": {
+    "spec": {
+      "constructors": [
+        {
+          "args": [
+            {
+              "label": "asset_code_0",
+              "type": {
+                "displayName": [
+                  "String"
+                ],
+                "type": 7
+              }
+            },
+            {
+              "label": "issuer_0",
+              "type": {
+                "displayName": [
+                  "String"
+                ],
+                "type": 7
+              }
+            },
+            {
+              "label": "asset_code_1",
+              "type": {
+                "displayName": [
+                  "String"
+                ],
+                "type": 7
+              }
+            },
+            {
+              "label": "issuer_1",
+              "type": {
+                "displayName": [
+                  "String"
+                ],
+                "type": 7
+              }
+            }
+          ],
+          "docs": [],
+          "label": "new",
+          "payable": false,
+          "selector": "0x9bae9d5e"
+        }
+      ],
+      "docs": [],
+      "events": [
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "from",
+              "type": {
+                "displayName": [
+                  "Option"
+                ],
+                "type": 16
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "to",
+              "type": {
+                "displayName": [
+                  "Option"
+                ],
+                "type": 16
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "value",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [
+            " Event emitted when a token transfer occurs."
+          ],
+          "label": "Transfer"
+        },
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "sender",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "amount_0",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "amount_1",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [],
+          "label": "Mint"
+        },
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "sender",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "to",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "amount_0",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "amount_1",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [],
+          "label": "Burn"
+        },
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "sender",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "to",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "amount_0_in",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "amount_1_in",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "amount_0_out",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "amount_1_out",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [],
+          "label": "Swap"
+        },
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "reserve_0",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "reserve_1",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [],
+          "label": "Sync"
+        }
+      ],
+      "messages": [
+        {
+          "args": [],
+          "docs": [
+            " Returns the total token supply."
+          ],
+          "label": "total_supply",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Balance"
+            ],
+            "type": 1
+          },
+          "selector": "0xdb6375a8"
+        },
+        {
+          "args": [
+            {
+              "label": "owner",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            }
+          ],
+          "docs": [
+            " Returns the account balance for the specified `owner`.",
+            "",
+            " Returns `0` if the account is non-existent."
+          ],
+          "label": "lp_balance_of",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Balance"
+            ],
+            "type": 1
+          },
+          "selector": "0x751f35b1"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "asset_1",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "String"
+            ],
+            "type": 7
+          },
+          "selector": "0x1178525e"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "issuer_1",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "String"
+            ],
+            "type": 7
+          },
+          "selector": "0x5ff024ad"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "asset_2",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "String"
+            ],
+            "type": 7
+          },
+          "selector": "0x20693129"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "issuer_2",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "String"
+            ],
+            "type": 7
+          },
+          "selector": "0xa7ca8ba5"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "minimum_liquidity",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "u128"
+            ],
+            "type": 1
+          },
+          "selector": "0x08aeda3e"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "get_reserves",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [],
+            "type": 8
+          },
+          "selector": "0x8a0d116f"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "price_0_cumulative_last",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "u128"
+            ],
+            "type": 1
+          },
+          "selector": "0x9ec91cdb"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "price_1_cumulative_last",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "u128"
+            ],
+            "type": 1
+          },
+          "selector": "0xd249df74"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "k_last",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "u128"
+            ],
+            "type": 1
+          },
+          "selector": "0x59425d30"
+        },
+        {
+          "args": [
+            {
+              "label": "fee_to",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            }
+          ],
+          "docs": [],
+          "label": "set_fee_to",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 9
+          },
+          "selector": "0x67b3ae9d"
+        },
+        {
+          "args": [
+            {
+              "label": "to",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 3
+              }
+            }
+          ],
+          "docs": [
+            " Force balances to match reserves"
+          ],
+          "label": "skim",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 9
+          },
+          "selector": "0xa47122d0"
+        },
+        {
+          "args": [],
+          "docs": [],
+          "label": "sync",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 9
+          },
+          "selector": "0x48791be9"
+        },
+        {
+          "args": [
+            {
+              "label": "amount",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [
+            " Add liquidity"
+          ],
+          "label": "deposit_asset_1",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 13
+          },
+          "selector": "0x7eb85d8e"
+        },
+        {
+          "args": [
+            {
+              "label": "amount",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [
+            " Add liquidity"
+          ],
+          "label": "deposit_asset_2",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 13
+          },
+          "selector": "0xe5bf1f71"
+        },
+        {
+          "args": [
+            {
+              "label": "amount",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [
+            " Remove Liquidity"
+          ],
+          "label": "withdraw",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 14
+          },
+          "selector": "0x410fcc9d"
+        },
+        {
+          "args": [
+            {
+              "label": "amount_to_receive",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [
+            " Swap"
+          ],
+          "label": "swap_asset_1_for_asset_2",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 9
+          },
+          "selector": "0x9f187377"
+        },
+        {
+          "args": [
+            {
+              "label": "amount_to_receive",
+              "type": {
+                "displayName": [
+                  "Balance"
+                ],
+                "type": 1
+              }
+            }
+          ],
+          "docs": [
+            " Swap"
+          ],
+          "label": "swap_asset_2_for_asset_1",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "Result"
+            ],
+            "type": 9
+          },
+          "selector": "0x0b41049a"
+        }
+      ]
+    },
+    "storage": {
+      "struct": {
+        "fields": [
+          {
+            "layout": {
+              "struct": {
+                "fields": [
+                  {
+                    "layout": {
+                      "array": {
+                        "cellsPerElem": 1,
+                        "layout": {
+                          "cell": {
+                            "key": "0x2000000000000000000000000000000000000000000000000000000000000000",
+                            "ty": 0
+                          }
+                        },
+                        "len": 32,
+                        "offset": "0x0000000000000000000000000000000000000000000000000000000000000000"
+                      }
+                    },
+                    "name": null
+                  },
+                  {
+                    "layout": {
+                      "array": {
+                        "cellsPerElem": 1,
+                        "layout": {
+                          "cell": {
+                            "key": "0x2c00000000000000000000000000000000000000000000000000000000000000",
+                            "ty": 0
+                          }
+                        },
+                        "len": 12,
+                        "offset": "0x2000000000000000000000000000000000000000000000000000000000000000"
+                      }
+                    },
+                    "name": null
+                  }
+                ]
+              }
+            },
+            "name": "asset_0"
+          },
+          {
+            "layout": {
+              "struct": {
+                "fields": [
+                  {
+                    "layout": {
+                      "array": {
+                        "cellsPerElem": 1,
+                        "layout": {
+                          "cell": {
+                            "key": "0x4c00000000000000000000000000000000000000000000000000000000000000",
+                            "ty": 0
+                          }
+                        },
+                        "len": 32,
+                        "offset": "0x2c00000000000000000000000000000000000000000000000000000000000000"
+                      }
+                    },
+                    "name": null
+                  },
+                  {
+                    "layout": {
+                      "array": {
+                        "cellsPerElem": 1,
+                        "layout": {
+                          "cell": {
+                            "key": "0x5800000000000000000000000000000000000000000000000000000000000000",
+                            "ty": 0
+                          }
+                        },
+                        "len": 12,
+                        "offset": "0x4c00000000000000000000000000000000000000000000000000000000000000"
+                      }
+                    },
+                    "name": null
+                  }
+                ]
+              }
+            },
+            "name": "asset_1"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5800000000000000000000000000000000000000000000000000000000000000",
+                "ty": 1
+              }
+            },
+            "name": "reserve_0"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5900000000000000000000000000000000000000000000000000000000000000",
+                "ty": 1
+              }
+            },
+            "name": "reserve_1"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5a00000000000000000000000000000000000000000000000000000000000000",
+                "ty": 2
+              }
+            },
+            "name": "block_timestamp_last"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5b00000000000000000000000000000000000000000000000000000000000000",
+                "ty": 1
+              }
+            },
+            "name": "price_0_cumulative_last"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5c00000000000000000000000000000000000000000000000000000000000000",
+                "ty": 1
+              }
+            },
+            "name": "price_1_cumulative_last"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5d00000000000000000000000000000000000000000000000000000000000000",
+                "ty": 1
+              }
+            },
+            "name": "k_last"
+          },
+          {
+            "layout": {
+              "enum": {
+                "dispatchKey": "0x5e00000000000000000000000000000000000000000000000000000000000000",
+                "variants": {
+                  "0": {
+                    "fields": [
+                      {
+                        "layout": {
+                          "cell": {
+                            "key": "0x5f00000000000000000000000000000000000000000000000000000000000000",
+                            "ty": 3
+                          }
+                        },
+                        "name": null
+                      }
+                    ]
+                  },
+                  "1": {
+                    "fields": []
+                  }
+                }
+              }
+            },
+            "name": "fee_to"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x5f00000000000000000000000000000000000000000000000000000000000000",
+                "ty": 3
+              }
+            },
+            "name": "fee_to_setter"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x6000000000000000000000000000000000000000000000000000000000000000",
+                "ty": 1
+              }
+            },
+            "name": "total_supply"
+          },
+          {
+            "layout": {
+              "cell": {
+                "key": "0x6100000000000000000000000000000000000000000000000000000000000000",
+                "ty": 5
+              }
+            },
+            "name": "lp_balances"
+          }
+        ]
+      }
+    },
+    "types": [
+      {
+        "id": 0,
+        "type": {
+          "def": {
+            "primitive": "u8"
+          }
+        }
+      },
+      {
+        "id": 1,
+        "type": {
+          "def": {
+            "primitive": "u128"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "type": {
+          "def": {
+            "primitive": "u64"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "type": 4,
+                  "typeName": "[u8; 32]"
+                }
+              ]
+            }
+          },
+          "path": [
+            "ink_env",
+            "types",
+            "AccountId"
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "type": {
+          "def": {
+            "array": {
+              "len": 32,
+              "type": 0
+            }
+          }
+        }
+      },
+      {
+        "id": 5,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "name": "offset_key",
+                  "type": 6,
+                  "typeName": "Key"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "K",
+              "type": 3
+            },
+            {
+              "name": "V",
+              "type": 1
+            }
+          ],
+          "path": [
+            "ink_storage",
+            "lazy",
+            "mapping",
+            "Mapping"
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "type": 4,
+                  "typeName": "[u8; 32]"
+                }
+              ]
+            }
+          },
+          "path": [
+            "ink_primitives",
+            "Key"
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "type": {
+          "def": {
+            "primitive": "str"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "type": {
+          "def": {
+            "tuple": [
+              1,
+              1,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": 9,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 10
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 11
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 10
+            },
+            {
+              "name": "E",
+              "type": 11
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 10,
+        "type": {
+          "def": {
+            "tuple": []
+          }
+        }
+      },
+      {
+        "id": 11,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "index": 0,
+                  "name": "Forbidden"
+                },
+                {
+                  "index": 1,
+                  "name": "InsufficientBalance"
+                },
+                {
+                  "index": 2,
+                  "name": "InsufficientAllowance"
+                },
+                {
+                  "index": 3,
+                  "name": "InsufficientLiquidity"
+                },
+                {
+                  "index": 4,
+                  "name": "InsufficientBalance0"
+                },
+                {
+                  "index": 5,
+                  "name": "InsufficientBalance1"
+                },
+                {
+                  "index": 6,
+                  "name": "InsufficientLiquidityMinted"
+                },
+                {
+                  "index": 7,
+                  "name": "InsufficientLiquidityBurned"
+                },
+                {
+                  "index": 8,
+                  "name": "InsufficientInputAmount"
+                },
+                {
+                  "index": 9,
+                  "name": "InsufficientOutputAmount"
+                },
+                {
+                  "index": 10,
+                  "name": "InvalidDepositToken"
+                },
+                {
+                  "index": 11,
+                  "name": "InvalidSwapToken"
+                },
+                {
+                  "index": 12,
+                  "name": "InvalidTo"
+                },
+                {
+                  "index": 13,
+                  "name": "InvalidK"
+                },
+                {
+                  "index": 14,
+                  "name": "IdenticalAddress"
+                },
+                {
+                  "index": 15,
+                  "name": "PairExists"
+                },
+                {
+                  "index": 16,
+                  "name": "AddressGenerationFailed"
+                },
+                {
+                  "index": 17,
+                  "name": "WithdrawWithoutSupply"
+                },
+                {
+                  "index": 18,
+                  "name": "InvalidStellarKeyEncoding"
+                },
+                {
+                  "index": 19,
+                  "name": "InvalidStellarKeyEncodingLength"
+                },
+                {
+                  "fields": [
+                    {
+                      "name": "expected",
+                      "type": 12,
+                      "typeName": "u16"
+                    },
+                    {
+                      "name": "found",
+                      "type": 12,
+                      "typeName": "u16"
+                    }
+                  ],
+                  "index": 20,
+                  "name": "InvalidStellarKeyChecksum"
+                },
+                {
+                  "index": 21,
+                  "name": "InvalidStellarKeyEncodingVersion"
+                },
+                {
+                  "index": 22,
+                  "name": "AssetCodeTooLong"
+                },
+                {
+                  "index": 23,
+                  "name": "InvalidAssetCodeCharacter"
+                },
+                {
+                  "index": 24,
+                  "name": "InvalidBase32Character"
+                }
+              ]
+            }
+          },
+          "path": [
+            "pendulum_amm",
+            "amm",
+            "Error"
+          ]
+        }
+      },
+      {
+        "id": 12,
+        "type": {
+          "def": {
+            "primitive": "u16"
+          }
+        }
+      },
+      {
+        "id": 13,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 1
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 11
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 1
+            },
+            {
+              "name": "E",
+              "type": 11
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 14,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 15
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 11
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 15
+            },
+            {
+              "name": "E",
+              "type": 11
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 15,
+        "type": {
+          "def": {
+            "tuple": [
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": 16,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "index": 0,
+                  "name": "None"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 3
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Some"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 3
+            }
+          ],
+          "path": [
+            "Option"
+          ]
+        }
+      }
+    ]
+  }
+}

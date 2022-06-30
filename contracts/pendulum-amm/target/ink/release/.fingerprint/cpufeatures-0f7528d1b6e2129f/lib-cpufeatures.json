@@ -1,0 +1,1 @@
+{"rustc":6889052415480890405,"features":"[]","target":17099120278032617052,"profile":6269190295429226618,"path":3789012601140317026,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/cpufeatures-0f7528d1b6e2129f/dep-lib-cpufeatures"}}],"rustflags":["-C","link-arg=-fuse-ld=/bin/mold"],"metadata":5592991748584184974,"config":16520146531172537597,"compile_kind":0}

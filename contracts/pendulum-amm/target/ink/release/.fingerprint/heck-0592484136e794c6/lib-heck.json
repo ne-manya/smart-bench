@@ -1,0 +1,1 @@
+{"rustc":6889052415480890405,"features":"[\"default\"]","target":13541735487965020728,"profile":6269190295429226618,"path":13542598423453758941,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/heck-0592484136e794c6/dep-lib-heck"}}],"rustflags":["-C","link-arg=-fuse-ld=/bin/mold"],"metadata":4968006677088137060,"config":16520146531172537597,"compile_kind":0}

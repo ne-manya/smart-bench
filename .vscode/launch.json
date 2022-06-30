@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Dbg 'smart-bench'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=smart-bench",
+                ],
+                "filter": {
+                    "name": "smart-bench",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "--",
+                "wasm",
+                "set-fee-to",
+                "--instance-count 10",
+                "--call-count 20",
+                "--url ws://localhost:9944",
+            ],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

@@ -24,67 +24,20 @@ pub trait InkMessage: codec::Encode {
     const SELECTOR: [u8; 4];
 }
 
-smart_bench_macro::contract!("./contracts/erc20.contract");
-smart_bench_macro::contract!("./contracts/flipper.contract");
-smart_bench_macro::contract!("./contracts/incrementer.contract");
-smart_bench_macro::contract!("./contracts/erc721.contract");
-smart_bench_macro::contract!("./contracts/erc1155.contract");
 smart_bench_macro::contract!("./contracts/computation.contract");
-smart_bench_macro::contract!("./contracts/storage.contract");
+smart_bench_macro::contract!("./contracts/pendulum_amm.contract");
 
 pub async fn exec(cli: Cli) -> color_eyre::Result<()> {
     let alice = PairSigner::new(AccountKeyring::Alice.pair());
     let bob = AccountKeyring::Bob.to_account_id();
 
+    let alice_acc: &sp_core::crypto::AccountId32 = alice.account_id();
+    let alice_acc = alice_acc.clone().to_string();
+
     let mut runner = runner::BenchRunner::new(alice, &cli.url).await?;
 
     for contract in &cli.contracts {
         match contract {
-            Contract::Erc20 => {
-                let erc20_new = erc20::constructors::new(1_000_000);
-                let erc20_transfer = || erc20::messages::transfer(bob.clone(), 1000).into();
-                runner
-                    .prepare_contract("erc20", erc20_new, cli.instance_count, &erc20_transfer)
-                    .await?;
-            }
-            Contract::Flipper => {
-                let flipper_new = flipper::constructors::new(false);
-                let flipper_flip = || flipper::messages::flip().into();
-                runner
-                    .prepare_contract("flipper", flipper_new, cli.instance_count, &flipper_flip)
-                    .await?;
-            }
-            Contract::Incrementer => {
-                let incrementer_new = incrementer::constructors::new(0);
-                let incrementer_increment = || incrementer::messages::inc(1).into();
-                runner
-                    .prepare_contract(
-                        "incrementer",
-                        incrementer_new,
-                        cli.instance_count,
-                        incrementer_increment,
-                    )
-                    .await?;
-            }
-            Contract::Erc721 => {
-                let erc721_new = erc721::constructors::new();
-                let mut token_id = 0;
-                let erc721_mint = || {
-                    let mint = erc721::messages::mint(token_id);
-                    token_id += 1;
-                    mint.into()
-                };
-                runner
-                    .prepare_contract("erc721", erc721_new, cli.instance_count, erc721_mint)
-                    .await?;
-            }
-            Contract::Erc1155 => {
-                let erc1155_new = erc1155::constructors::new();
-                let erc1155_create = || erc1155::messages::create(1_000_000).into();
-                runner
-                    .prepare_contract("erc1155", erc1155_new, cli.instance_count, erc1155_create)
-                    .await?;
-            }
             Contract::OddProduct => {
                 let computation_new = computation::constructors::new();
                 let computation_odd_product = || computation::messages::odd_product(1000).into();
@@ -110,25 +63,22 @@ pub async fn exec(cli: Cli) -> color_eyre::Result<()> {
                     )
                     .await?;
             }
-            Contract::StorageRead => {
-                let storage_new = storage::constructors::new();
-                let storage_read = || storage::messages::read(bob.clone(), 10).into();
+            Contract::SetFeeTo => {
+                let pen_constructor = pendulum_amm::constructors::new(
+                    "USDC".to_string(),
+                    "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY".to_string(),
+                    "EUR ".to_string(),
+                    "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty".to_string(),
+                );
+                let pen_set_fee_to = || pendulum_amm::messages::set_fee_to(bob.clone()).into();
+
                 runner
-                    .prepare_contract("storage", storage_new, cli.instance_count, storage_read)
-                    .await?;
-            }
-            Contract::StorageWrite => {
-                let storage_new = storage::constructors::new();
-                let storage_read = || storage::messages::write(bob.clone(), 10).into();
-                runner
-                    .prepare_contract("storage", storage_new, cli.instance_count, storage_read)
-                    .await?;
-            }
-            Contract::StorageReadWrite => {
-                let storage_new = storage::constructors::new();
-                let storage_read = || storage::messages::read_write(bob.clone(), 10).into();
-                runner
-                    .prepare_contract("storage", storage_new, cli.instance_count, storage_read)
+                    .prepare_contract(
+                        "pendulum_amm",
+                        pen_constructor,
+                        cli.instance_count,
+                        pen_set_fee_to,
+                    )
                     .await?;
             }
         }
