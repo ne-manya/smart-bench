@@ -32,7 +32,7 @@ pub async fn exec(cli: Cli) -> color_eyre::Result<()> {
     let bob = AccountKeyring::Bob.to_account_id();
 
     let alice_acc: &sp_core::crypto::AccountId32 = alice.account_id();
-    let alice_acc = alice_acc.clone().to_string();
+    let _alice_acc = alice_acc.clone().to_string();
 
     let mut runner = runner::BenchRunner::new(alice, &cli.url).await?;
 
@@ -66,9 +66,9 @@ pub async fn exec(cli: Cli) -> color_eyre::Result<()> {
             Contract::SetFeeTo => {
                 let pen_constructor = pendulum_amm::constructors::new(
                     "USDC".to_string(),
-                    "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY".to_string(),
-                    "EUR ".to_string(),
-                    "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty".to_string(),
+                    "GAKNDFRRWA3RPWNLTI3G4EBSD3RGNZZOY5WKWYMQ6CQTG3KIEKPYWAYC".to_string(),
+                    "EUR".to_string(),
+                    "GAKNDFRRWA3RPWNLTI3G4EBSD3RGNZZOY5WKWYMQ6CQTG3KIEKPYWAYC".to_string(),
                 );
                 let pen_set_fee_to = || pendulum_amm::messages::set_fee_to(bob.clone()).into();
 

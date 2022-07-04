@@ -2,8 +2,11 @@ use super::*;
 use codec::Encode;
 use color_eyre::eyre;
 use futures::{future, StreamExt, TryStream, TryStreamExt};
+use jsonrpsee::rpc_params;
 use sp_runtime::traits::{BlakeTwo256, Hash as _};
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::{time::{SystemTime, UNIX_EPOCH}, sync::Arc};
+use subxt::*;
+use jsonrpsee::core::client::ClientT;
 
 pub const DEFAULT_STORAGE_DEPOSIT_LIMIT: Option<Balance> = None;
 
@@ -182,6 +185,7 @@ impl BenchRunner {
         &mut self,
         call_count: u32,
     ) -> color_eyre::Result<impl TryStream<Ok = BlockInfo, Error = color_eyre::Report> + '_> {
+
         let block_stats = blockstats::subscribe_stats(&self.url).await?;
 
         let mut tx_hashes = Vec::new();
