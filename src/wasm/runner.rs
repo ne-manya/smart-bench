@@ -2,13 +2,14 @@ use super::*;
 use codec::Encode;
 use color_eyre::eyre;
 use futures::{future, StreamExt, TryStream, TryStreamExt};
-use jsonrpsee::rpc_params;
 use sp_runtime::traits::{BlakeTwo256, Hash as _};
-use std::{time::{SystemTime, UNIX_EPOCH}, sync::Arc};
+use std::{time::{SystemTime, UNIX_EPOCH}};
 use subxt::*;
-use jsonrpsee::core::client::ClientT;
 
 pub const DEFAULT_STORAGE_DEPOSIT_LIMIT: Option<Balance> = None;
+
+// #[subxt::subxt(runtime_metadata_path = "./metadata.scale")]
+// pub mod polkadot {}
 
 pub struct BenchRunner {
     url: String,
@@ -305,3 +306,94 @@ pub struct BlockInfo {
     pub stats: blockstats::BlockStats,
     pub extrinsics: Vec<Hash>,
 }
+
+// async fn sub_blocks() -> Result<impl TryStream<Ok = blockstats::BlockStats, Error = BasicError> + Unpin, BasicError> {
+//     let api = ClientBuilder::new()
+//         .set_url("ws://localhost:9944")
+//         .build()
+//         .await?
+//         .to_runtime_api::<polkadot::RuntimeApi<DefaultConfig, PolkadotExtrinsicParams<DefaultConfig>>>();
+
+
+//         let blocks = api.client
+//         .rpc()
+//         .subscribe_blocks()
+//         .await?
+//         .map_err(BasicError::from);
+
+//         println!("{:?}", blocks);
+
+//     let max_block_weights: BlockWeights = {
+//         let locked_metadata = api.client.metadata();
+//         let metadata = locked_metadata.read();
+//         let pallet = metadata.pallet("System")?;
+//         let constant = pallet.constant("BlockWeights")?;
+//         codec::Decode::decode(&mut &constant.value[..])?
+//     };
+
+//     Ok(Box::pin(blocks.map_err(Into::into).and_then(
+//         move |block| {
+//             let client = api.client.clone();
+//             let block_weight_storage_entry = BlockWeightStorageEntry;
+//             async move {
+//                 let stats = client
+//                     .rpc()
+//                     .block_stats(block.hash())
+//                     .await?
+//                     .ok_or_else(|| BasicError::Other("Block not available.".to_string()))?;
+//                 let weight = client
+//                     .storage()
+//                     .fetch_or_default(&block_weight_storage_entry, Some(block.hash()))
+//                     .await?;
+//                 let pov_len = stats.witness_len + stats.block_len;
+//                 let total_weight = weight.normal + weight.operational + weight.mandatory;
+
+//                 Ok(blockstats::BlockStats {
+//                     hash: block.hash(),
+//                     number: block.number,
+//                     pov_len,
+//                     witness_len: stats.witness_len,
+//                     len: stats.block_len,
+//                     weight: total_weight,
+//                     num_extrinsics: stats.num_extrinsics,
+//                     max_pov: 5_242_880 / 2,
+//                     max_weight: max_block_weights.max_block,
+//                 })
+//             }
+//         },
+//     )))
+// }
+
+// #[derive(codec::Encode, codec::Decode)]
+// struct BlockWeights {
+//     pub base_block: u64,
+//     pub max_block: u64,
+//     pub per_class: PerDispatchClass<WeightsPerClass>,
+// }
+
+// #[derive(Clone)]
+// struct BlockWeightStorageEntry;
+
+// impl subxt::StorageEntry for BlockWeightStorageEntry {
+//     const PALLET: &'static str = "System";
+//     const STORAGE: &'static str = "BlockWeight";
+//     type Value = PerDispatchClass<u64>;
+//     fn key(&self) -> subxt::StorageEntryKey {
+//         subxt::StorageEntryKey::Plain
+//     }
+// }
+
+// #[derive(codec::Encode, codec::Decode)]
+// struct PerDispatchClass<T> {
+//     normal: T,
+//     operational: T,
+//     mandatory: T,
+// }
+
+// #[derive(codec::Encode, codec::Decode)]
+// struct WeightsPerClass {
+//     pub base_extrinsic: u64,
+//     pub max_extrinsic: Option<u64>,
+//     pub max_total: Option<u64>,
+//     pub reserved: Option<u64>,
+// }

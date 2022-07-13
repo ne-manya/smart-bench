@@ -31,9 +31,8 @@ pub enum TargetPlatform {
 
 #[derive(clap::ArgEnum, Debug, Clone, Eq, PartialEq)]
 pub enum Contract {
-    OddProduct,
-    TriangleNumber,
     SetFeeTo,
+    GetReserves,
 }
 
 #[tokio::main]
