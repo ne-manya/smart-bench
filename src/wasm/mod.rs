@@ -56,6 +56,42 @@ pub async fn exec(cli: Cli) -> color_eyre::Result<()> {
                     )
                     .await?;
             }
+            Contract::Skim => {
+                let pen_constructor = pendulum_amm::constructors::new(
+                    "USDC".to_string(),
+                    "GAKNDFRRWA3RPWNLTI3G4EBSD3RGNZZOY5WKWYMQ6CQTG3KIEKPYWAYC".to_string(),
+                    "EUR".to_string(),
+                    "GAKNDFRRWA3RPWNLTI3G4EBSD3RGNZZOY5WKWYMQ6CQTG3KIEKPYWAYC".to_string(),
+                );
+                let pen_skim = || pendulum_amm::messages::skim(bob.clone()).into();
+
+                runner
+                    .prepare_contract(
+                        "pendulum_amm",
+                        pen_constructor,
+                        cli.instance_count,
+                        pen_skim,
+                    )
+                    .await?;
+            }
+            Contract::Sync => {
+                let pen_constructor = pendulum_amm::constructors::new(
+                    "USDC".to_string(),
+                    "GAKNDFRRWA3RPWNLTI3G4EBSD3RGNZZOY5WKWYMQ6CQTG3KIEKPYWAYC".to_string(),
+                    "EUR".to_string(),
+                    "GAKNDFRRWA3RPWNLTI3G4EBSD3RGNZZOY5WKWYMQ6CQTG3KIEKPYWAYC".to_string(),
+                );
+                let pen_skim = || pendulum_amm::messages::sync().into();
+
+                runner
+                    .prepare_contract(
+                        "pendulum_amm",
+                        pen_constructor,
+                        cli.instance_count,
+                        pen_skim,
+                    )
+                    .await?;
+            }
             Contract::GetReserves => {
                 let pen_constructor = pendulum_amm::constructors::new(
                     "USDC".to_string(),

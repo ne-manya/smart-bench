@@ -19,12 +19,12 @@
                 }
             },
             "args": [
-                "--",
                 "wasm",
                 "set-fee-to",
-                "--instance-count 10",
-                "--call-count 20",
-                "--url ws://localhost:9944",
+                "--instance-count",
+                "10",
+                "--call-count",
+                "20"
             ],
             "cwd": "${workspaceFolder}"
         }

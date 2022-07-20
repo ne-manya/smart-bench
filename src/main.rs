@@ -32,6 +32,8 @@ pub enum TargetPlatform {
 #[derive(clap::ArgEnum, Debug, Clone, Eq, PartialEq)]
 pub enum Contract {
     SetFeeTo,
+    Skim,
+    Sync,
     GetReserves,
 }
 
